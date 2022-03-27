@@ -51,7 +51,7 @@ ssh-copy-id hadoop@node1
 ssh-copy-id hadoop@node2
 ```
 
-```
+```bash
 sudo vi .bashrc
     export PDSH_RCMD_TYPE=ssh
 ```
@@ -187,3 +187,17 @@ hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.
 hadoop dfs -cat /WordCount/Output/*
 hadoop dfs -cat /WordCount/Output/* | sort -n -k2 # сортируем вывод по возрастанию кол-ва слов
 ```
+
+## Полезные ссылки
+
+### Hadoop Single Node Cluster  
+[How to Install Hadoop Cluster on Ubuntu 16.04](https://medium.com/@alibaba-cloud/how-to-install-hadoop-cluster-on-ubuntu-16-04-bd9f52e5447c)  
+
+[How to run WordCount program using Hadoop on Ubuntu](https://www.youtube.com/watch?v=UD8ysT3DTIQ) # установка hadoop и запуск своей wordcount.java программы  
+Есть [интсрукция](https://docs.google.com/document/d/1-BKY9iBpkm2dSbO7OKc33JBa4CZymOCiwl1EWaFqeBQ/edit).  
+
+[Hadoop Single Node Setup](https://www.youtube.com/watch?v=98UCknD8_qA)  
+Есть [интсрукция](https://github.com/atozknowledge/bigdata/wiki/Hadoop-Single-Node-Installation).  
+
+### Hadoop Multi-Node Cluster
+[How To Set Up a Hadoop 3.2.1 Multi-Node Cluster on Ubuntu 18.04 (2 Nodes)](https://medium.com/@jootorres_11979/how-to-set-up-a-hadoop-3-2-1-multi-node-cluster-on-ubuntu-18-04-2-nodes-567ca44a3b12)
