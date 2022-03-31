@@ -184,8 +184,8 @@ hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.
 ```
 Выводим результат:
 ```
-hadoop dfs -cat /WordCount/Output/*
-hadoop dfs -cat /WordCount/Output/* | sort -n -k2 # сортируем вывод по возрастанию кол-ва слов
+hdfs dfs -cat /WordCount/Output/*
+hdfs dfs -cat /WordCount/Output/* | sort -n -k2 # сортируем вывод по возрастанию кол-ва слов
 ```
 
 ## Полезные ссылки
