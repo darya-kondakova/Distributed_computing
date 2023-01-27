@@ -164,6 +164,77 @@ sudo systemctl restart slurmd
 sinfo
 ```
 
+## Munge
+
+**на head**
+```
+sudo create-munge-key
+```
+
+скопировать ключ `/etc/munge/munge.key` на node-ы сохранив права:
+```
+sudo scp /etc/munge/munge.key darya@node1:/etc/munge/munge.key
+sudo scp /etc/munge/munge.key darya@node2:/etc/munge/munge.key
+```
+
+**на node’ах**
+```
+sudo chown munge:munge /etc/munge/munge.key
+```
+
+после синхронизации ключей перезапустить munge **везде**:
+```
+sudo systemctl restart munge
+```
+
+slurm нужно собирать `with pmix` 
+
+создать папку `/var/spool/slurmctld` для пользователя `slurm`:
+```
+sudo mkdir /var/spool/slurmctld
+sudo chown slurm:slurm /var/spool/slurmctld
+```
+
+`slurm.conf` нужно делать в конфигураторе внутри виртуалки:
+- сгенирировать файл [здесь](https://slurm.schedmd.com/configurator.html) 
+- скачать html файл на машину 
+- переместить содержимое html файла в `/etc/slurm-llnl/`
+
+`slurmd` запускается только при прописанном файле `cgroup.conf`
+
+собираем pmix (openpmi) 3.2.3
+для сборки pmi и slurm:
+```
+sudo apt install libmunge-dev libhwloc-dev libevent-dev
+```
+
+сборка pmi:
+```
+./configure --prefix=<pmix3.2.3-folder>/installhere
+make all install
+```
+
+сборка slurm:
+```
+./configure --prefix=/usr/local --sysconfdir=/etc/slurm-llnl --with-pmix=<pmix3.2.3-folder>/installhere --with-munge
+sudo make install
+```
+
+если STATE down:
+```
+sudo scontrol update nodename=node2 state=idle
+cd
+```
+
+**на всех**
+```
+sudo systemctl start slurmd 
+```
+
+**на head**
+```
+sudo systemctl start slurmctld
+```
 
 ## Создание пользователей
 ```
